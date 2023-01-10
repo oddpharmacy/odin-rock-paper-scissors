@@ -45,25 +45,30 @@ switch (true) {
         break;
 }
 
+// Initialize result counts
+let win = 0;
+let loss = 0;
+let tie = 0;
+
 // Round of rock paper scissors
-let win;
-let loss;
-let tie;
-console.log("PS" + playerSelection)
-console.log("CS" + computerSelection)
+// console.log("PS" + playerSelection)
+// console.log("CS" + computerSelection)
 
 function playRound(playerSelection, computerSelection) {
     if (computerSelection === playerSelection) {
         console.log("It's a tie!");
+        tie++;
     }
     else if (computerSelection == 'ROCK') {
         switch (true) {
             case (playerSelection == 'PAPER'):
                 console.log("You Win! Paper beats Rock");
+                win++;
                 break;
             
             case (playerSelection == 'SCISSORS'):
                 console.log("You Lose! Rock beats Scissors");
+                lose++;
                 break;
         }
     }
@@ -71,10 +76,12 @@ function playRound(playerSelection, computerSelection) {
         switch (true) {
             case (playerSelection == 'ROCK'):
                 console.log("You Lose! Paper beats Rock");
+                lose++;
                 break;
             
             case (playerSelection == 'SCISSORS'):
                 console.log("You Win! Scissors beats Paper");
+                win++;
                 break;
         }
     }
@@ -82,13 +89,16 @@ function playRound(playerSelection, computerSelection) {
         switch (true) {
             case (playerSelection == 'ROCK'):
                 console.log("You Win! Rock beats Scissors");
+                win++;
                 break;
 
             case (playerSelection == 'PAPER'):
                 console.log("You Lose! Scissors beats Paper");
+                lose++;
                 break;
         }
     }
 }
 
-console.log(playRound(playerSelection, computerSelection));
+// console.log(playRound(playerSelection, computerSelection));
+
