@@ -3,10 +3,9 @@ function getComputerChoice(min, max) {
 }
 
 let ranNumber = getComputerChoice(1, 3);
+let result;
 
 switch (ranNumber) {
-    let result;
-
     case 1:
         result = 'rock';
         break;
@@ -19,3 +18,5 @@ switch (ranNumber) {
         result = 'scissors';
         break;
 }
+
+console.log(result);
