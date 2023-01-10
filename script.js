@@ -1,49 +1,64 @@
 // Get rock, paper or scissors from com
-function getComputerChoice(min, max) {
+
+function getRan(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let ranNumber = getComputerChoice(1, 3);
-let computerSelection;
-
-switch (ranNumber) {
-    case 1:
-        computerSelection = 'ROCK';
-        break;
+function getComputerChoice() {
+    let ranNumber = getRan(1, 3);
+    let computerSelection;
+    switch (ranNumber) {
+        case 1:
+            computerSelection = 'ROCK';
+            break;
+        
+        case 2:
+            computerSelection = 'PAPER';
+            break;
     
-    case 2:
-        computerSelection = 'PAPER';
-        break;
-
-    case 3:
-        computerSelection = 'SCISSORS';
-        break;
+        case 3:
+            computerSelection = 'SCISSORS';
+            break;
+    }
+    return computerSelection;
 }
+
 
 //
 
 // Get player input of rock, paper or scissors
 
-let playerSelection = prompt("Choose rock, paper or scissors");
+function getPlayerSelection() {
+    let playerSelection = prompt("Choose rock, paper or scissors");
 
-// Check player input 
-
-let checkPlayerSelection = playerSelection.toUpperCase();
-
-switch (true) {
-    case (checkPlayerSelection == 'ROCK'):
-    case (checkPlayerSelection == 'PAPER'):
-    case (checkPlayerSelection == 'SCISSORS'):
-        console.log("Player input recorded");
-        playerSelection = checkPlayerSelection;
-        checkPlayerSelection = true;
-        break;
+    // Check player input 
     
-    default:
-        console.log("Invalid input");
-        checkPlayerSelection = false;
-        break;
+    if (playerSelection == null) {
+        console.log("Cancelled");
+        return;
+    }
+    let checkPlayerSelection = playerSelection.toUpperCase();
+    
+    switch (true) {
+        case (checkPlayerSelection == 'ROCK'):
+        case (checkPlayerSelection == 'PAPER'):
+        case (checkPlayerSelection == 'SCISSORS'):
+            // console.log("Player input recorded");
+            playerSelection = checkPlayerSelection;
+            checkPlayerSelection = true;
+            break;
+        
+        default:
+            console.log("Invalid input");
+            checkPlayerSelection = false;
+            break;
+    }
+
+    if (checkPlayerSelection == true) {
+        return playerSelection;
+    }
 }
+
 
 // Initialize result counts
 let comWins = 0;
@@ -98,15 +113,24 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// console.log(playRound(playerSelection, computerSelection));
 
 // Simulate 5 rounds
 
 function game() {
+    let player = getPlayerSelection();
+    let computer = getComputerChoice();
+
+    // If player cancels, break
+    // if (player == null) {
+    //     break;
+    // }
+
     for (let i = 0; i < 5; i++) {
-        playRound(playerSelection, computerSelection);
+        playRound(player, computer);
+        // Print results of each round
+        console.log(`Player: ${plaWins} | Computer: ${comWins}`);
     }
-    (plaWins > comWins) ? "Congrats, you are the Winner!" : "You are the Loser!";
+    return (plaWins > comWins) ? "Congrats, you are the Winner!" : "You are the Loser!";
 }
 
 console.log(game());
