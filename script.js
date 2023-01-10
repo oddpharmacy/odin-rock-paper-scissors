@@ -8,15 +8,15 @@ let computerSelection;
 
 switch (ranNumber) {
     case 1:
-        computerSelection = 'rock';
+        computerSelection = 'ROCK';
         break;
     
     case 2:
-        computerSelection = 'paper';
+        computerSelection = 'PAPER';
         break;
 
     case 3:
-        computerSelection = 'scissors';
+        computerSelection = 'SCISSORS';
         break;
 }
 
@@ -45,3 +45,50 @@ switch (true) {
         break;
 }
 
+// Round of rock paper scissors
+let win;
+let loss;
+let tie;
+console.log("PS" + playerSelection)
+console.log("CS" + computerSelection)
+
+function playRound(playerSelection, computerSelection) {
+    if (computerSelection === playerSelection) {
+        console.log("It's a tie!");
+    }
+    else if (computerSelection == 'ROCK') {
+        switch (true) {
+            case (playerSelection == 'PAPER'):
+                console.log("You Win! Paper beats Rock");
+                break;
+            
+            case (playerSelection == 'SCISSORS'):
+                console.log("You Lose! Rock beats Scissors");
+                break;
+        }
+    }
+    else if (computerSelection == 'PAPER') {
+        switch (true) {
+            case (playerSelection == 'ROCK'):
+                console.log("You Lose! Paper beats Rock");
+                break;
+            
+            case (playerSelection == 'SCISSORS'):
+                console.log("You Win! Scissors beats Paper");
+                break;
+        }
+    }
+    else if (computerSelection = 'SCISSORS') {
+        switch (true) {
+            case (playerSelection == 'ROCK'):
+                console.log("You Win! Rock beats Scissors");
+                break;
+
+            case (playerSelection == 'PAPER'):
+                console.log("You Lose! Scissors beats Paper");
+                break;
+        }
+    }
+}
+
+console.log(playRound(playerSelection, computerSelection));
