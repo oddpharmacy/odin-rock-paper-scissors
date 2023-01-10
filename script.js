@@ -100,3 +100,13 @@ function playRound(playerSelection, computerSelection) {
 
 // console.log(playRound(playerSelection, computerSelection));
 
+// Simulate 5 rounds
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        playRound(playerSelection, computerSelection);
+    }
+    (plaWins > comWins) ? "Congrats, you are the Winner!" : "You are the Loser!";
+}
+
+console.log(game());
