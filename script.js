@@ -24,113 +24,105 @@ function getComputerChoice() {
 }
 
 
-//
+//  
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
 
-// Get player input of rock, paper or scissors
-
-function getPlayerSelection() {
-    let playerSelection = prompt("Choose rock, paper or scissors");
-
-    // Check player input 
-    
-    if (playerSelection == null) {
-        console.log("Cancelled");
-        return;
-    }
-    let checkPlayerSelection = playerSelection.toUpperCase();
-    
-    switch (true) {
-        case (checkPlayerSelection == 'ROCK'):
-        case (checkPlayerSelection == 'PAPER'):
-        case (checkPlayerSelection == 'SCISSORS'):
-            // console.log("Player input recorded");
-            playerSelection = checkPlayerSelection;
-            checkPlayerSelection = true;
-            break;
-        
-        default:
-            console.log("Invalid input");
-            checkPlayerSelection = false;
-            break;
-    }
-
-    if (checkPlayerSelection == true) {
-        return playerSelection;
-    }
-}
 
 
 // Initialize result counts
 let comWins = 0;
 let plaWins = 0;
 
-// Round of rock paper scissors
-// console.log("PS" + playerSelection)
-// console.log("CS" + computerSelection)
+
 
 function playRound(playerSelection, computerSelection) {
-    if (computerSelection === playerSelection) {
-        console.log("It's a tie!");
-    }
-    else if (computerSelection == 'ROCK') {
+    const result = document.createElement('div');
+
+    if (computerSelection == 'ROCK') {
         switch (true) {
-            case (playerSelection == 'PAPER'):
-                console.log("You Win! Paper beats Rock");
+            case (playerSelection == paper):
+                result.textContent = "You Win! Paper beats Rock";
                 plaWins++;
                 break;
             
-            case (playerSelection == 'SCISSORS'):
-                console.log("You Lose! Rock beats Scissors");
+            case (playerSelection == scissors):
+                result.textContent = "You Lose! Rock beats Scissors";
                 comWins++;
+                break;
+            
+            case (playerSelection == rock):
+                result.textContent = "It's a tie!";
                 break;
         }
     }
     else if (computerSelection == 'PAPER') {
         switch (true) {
-            case (playerSelection == 'ROCK'):
-                console.log("You Lose! Paper beats Rock");
+            case (playerSelection == rock):
+                result.textContent = "You Lose! Paper beats Rock";
                 comWins++;
                 break;
             
-            case (playerSelection == 'SCISSORS'):
-                console.log("You Win! Scissors beats Paper");
+            case (playerSelection == scissors):
+                result.textContent = "You Win! Scissors beats Paper";
                 plaWins++;
+                break;
+
+            case (playerSelection == paper):
+                result.textContent = "It's a tie!";
                 break;
         }
     }
     else if (computerSelection = 'SCISSORS') {
         switch (true) {
-            case (playerSelection == 'ROCK'):
-                console.log("You Win! Rock beats Scissors");
+            case (playerSelection == rock):
+                result.textContent = "You Win! Rock beats Scissors";
                 plaWins++;
                 break;
 
-            case (playerSelection == 'PAPER'):
-                console.log("You Lose! Scissors beats Paper");
-                comWins;
+            case (playerSelection == paper):
+                result.textContent = "You Lose! Scissors beats Paper";
+                comWins++;
+                break;
+
+            case (playerSelection == scissors):
+                result.textContent = "It's a tie!";
                 break;
         }
     }
+    results.appendChild(result);
 }
 
 
-// Simulate 5 rounds
+const buttons = document.querySelectorAll('button');
+console.log(buttons)
+buttons.forEach((button) => {
+    button.addEventListener('click', function clicked() {
+        playRound(button, getComputerChoice());
+        if (endGame(plaWins, comWins) == true) {
+            button.removeEventListener('click', clicked);
+        };
+        console.log(endGame(plaWins, comWins));
+    });
+})
 
-function game() {
-    let player = getPlayerSelection();
-    let computer = getComputerChoice();
+const results = document.querySelector('.results');
 
-    // If player cancels, break
-    // if (player == null) {
-    //     break;
-    // }
+const runningScore = document.createElement('p');
+runningScore.style.color = 'red';
 
-    for (let i = 0; i < 5; i++) {
-        playRound(player, computer);
-        // Print results of each round
-        console.log(`Player: ${plaWins} | Computer: ${comWins}`);
+function endGame(plaWins, comWins) {
+    if (plaWins >= 5) {  
+        runningScore.textContent = 'You are the winner!';
+        return true;
     }
-    return (plaWins > comWins) ? "Congrats, you are the Winner!" : "You are the Loser!";
+    else if (comWins >= 5) {
+        runningScore.textContent = 'You are the loser. COM Wins!';
+        return true;
+    }
 }
 
-console.log(game());
+const container = document.querySelector('.container');
+container.appendChild(runningScore)
+
